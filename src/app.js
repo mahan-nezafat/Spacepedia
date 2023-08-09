@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import Cards from './Components/Cards';
 const App = () => {
     const [query, setQuery] = useState('');
     const [items, setItems] = useState([]);
-    
-    let info = [];
-    let jsonLinks = [];
-    let imageLinks = [];
+    const [dataItems, setDataItems] = useState({
+        info: [],
+        jsonLinks: [],
+        imageLinks: [],
+      });
 
     useEffect( () => {
        async function fetchData() {
@@ -27,7 +29,23 @@ const App = () => {
        
     },[query])
 
-   
+    useEffect(() => {
+        const updatedDataItems = {
+          info: [],
+          jsonLinks: [],
+          imageLinks: [],
+        };
+        
+        for (const item of items) {
+          const { data, href, links } = item;
+          updatedDataItems.info.push(data);
+          updatedDataItems.jsonLinks.push(href);
+          updatedDataItems.imageLinks.push(links);
+        }
+        
+        setDataItems(updatedDataItems);
+    
+      }, [items]);
 
     
     function handleSubmit(e) {
@@ -36,17 +54,17 @@ const App = () => {
         
         for(const item of items) {
             const { data, href, links } = item;
-            info.push(data);
-            jsonLinks.push(href);
-            imageLinks.push(links);
+           
+           dataItems.info.push(data);
+           dataItems.jsonLinks.push(href);
+           dataItems.imageLinks.push(links);
         }
 
-       console.log(info)
-       console.log(jsonLinks)
-       console.log(imageLinks)
-
+       
+        console.log(Object.values(dataItems))
     }
-
+    
+    
 
     return (
         <>
@@ -54,9 +72,7 @@ const App = () => {
             <input type='text' value={query} onChange={(e) => setQuery(e.target.value)}/>
             <button>Submit</button>
             </form>
-            <div>
-                
-            </div>
+            <Cards dataItems={dataItems}/>
         </>
     );
 }
