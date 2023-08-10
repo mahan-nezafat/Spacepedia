@@ -42,26 +42,19 @@ const App = () => {
           updatedDataItems.jsonLinks.push(href);
           updatedDataItems.imageLinks.push(links);
         }
+        updatedDataItems.imageLinks.splice(10,90);
+        updatedDataItems.info.splice(10,90);
+        updatedDataItems.jsonLinks.splice(10,90);
         
         setDataItems(updatedDataItems);
-    
+        
+        // console.log(updatedDataItems);
       }, [items]);
 
     
     function handleSubmit(e) {
-        e.preventDefault();
-       
-        
-        for(const item of items) {
-            const { data, href, links } = item;
-           
-           dataItems.info.push(data);
-           dataItems.jsonLinks.push(href);
-           dataItems.imageLinks.push(links);
-        }
-
-       
-        console.log(Object.values(dataItems))
+      e.preventDefault();
+      
     }
     
     
