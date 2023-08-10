@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Card from './Card.jsx';
-const Cards = ({ dataItems }) => {
+const Cards = ({ dataItems, onSelectCard }) => {
     const [hrefLinks, setHrefLinks] = useState([]);
     const [jsonLinks, setJsonLinks] = useState([]);
     useEffect(() => {
@@ -35,14 +35,14 @@ const Cards = ({ dataItems }) => {
     
     return ( 
         <>
-            <div>
+            <div className='cards'>
                <ul>
                      
                 
                     {
                         Object.values(dataItems)[0].map((infoItem,index) => {
                                 
-                        return  <Card infoItem={infoItem} key={infoItem[0].nasa_id} dataLinks={hrefLinks[index]} jsonLink={jsonLinks[index]} />
+                        return  <Card infoItem={infoItem} key={infoItem[0].nasa_id} dataLinks={hrefLinks[index]} jsonLink={jsonLinks[index]} onSelectCard={onSelectCard} />
                         
                     })
                        

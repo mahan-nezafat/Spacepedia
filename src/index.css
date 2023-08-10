@@ -1,0 +1,90 @@
+@font-face {
+    font-family: appfont;
+    src: url();
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: appfont;
+    font-size: 16px;
+
+}
+a{
+    text-decoration: none;
+
+}
+ul{
+    list-style-type: none;
+}
+
+video{
+    width: 400px;
+    height: 300px;
+}
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.search{
+    display: flex;
+    width: 80%;
+    margin: 10px auto;
+    justify-content: center;
+    align-items: center;
+}
+.cards{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+}
+
+.cards li {
+    display: flex;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.cards li img{
+    width: 40%;
+    height: 100%;
+}
+.cards li p{
+    font-size: 1rem;
+}
+
+.cards li span{
+
+}
+
+.cards li h1{
+    font-size: 0.9rem;
+}
+.detail{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+    align-items: start;
+    margin-left: 5px;
+    width: 100%;
+}
+
+.detail>* {
+    margin: 10px 0;
+}
+
+.tags{
+    display: flex;
+    
+}
+.tags span{
+    margin: 0 10px;
+}
+.video{
+    width: 35%;
+}

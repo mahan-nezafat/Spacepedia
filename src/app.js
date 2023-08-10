@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cards from './Components/Cards';
+import Video from './Components/Video';
+import './index.css';
 const App = () => {
     const [query, setQuery] = useState('');
     const [items, setItems] = useState([]);
@@ -8,8 +10,10 @@ const App = () => {
         jsonLinks: [],
         imageLinks: [],
       });
-
+    const [videoLink, setVideoLink] = useState('');
+    const [selected, setSelected] = useState([])
     useEffect( () => {
+      const controller = new AbortController();
        async function fetchData() {
             try {
                 if(!query) return
@@ -27,6 +31,10 @@ const App = () => {
      
        fetchData();
        
+       return () => {
+         controller.abort();
+       }
+
     },[query])
 
     useEffect(() => {
@@ -52,20 +60,27 @@ const App = () => {
       }, [items]);
 
     
-    function handleSubmit(e) {
-      e.preventDefault();
-      
+    function SelectCard(id) {
+      setVideoLink('')
+      const selected = Object.values(dataItems.info).filter(item => item[0].nasa_id === id )
+      const index = dataItems.info.indexOf(selected[0]);
+      setVideoLink(dataItems.jsonLinks[index])
+      setSelected([...selected])
+        
+     
     }
-    
     
 
     return (
         <>
-            <form onSubmit={handleSubmit} >
+          <div className='search'>
             <input type='text' value={query} onChange={(e) => setQuery(e.target.value)}/>
-            <button>Submit</button>
-            </form>
-            <Cards dataItems={dataItems}/>
+          </div>
+        
+          <div className='container'>
+            <Cards dataItems={dataItems} onSelectCard={SelectCard}/>
+            <Video jsonLink={videoLink} selectedItem={selected}/>
+          </div>
         </>
     );
 }
